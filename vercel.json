@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm run build --filter=flowise-ui",
   "installCommand": "pnpm install --frozen-lockfile",
-  "outputDirectory": "dist",
+  "outputDirectory": "packages/ui/build",
   "ignoreCommand": "npx turbo-ignore"
 }
