@@ -1,5 +1,33 @@
 <!-- markdownlint-disable MD030 -->
- 
+ Looking at your repo, Flowise uses:
+
+**Frontend (`packages/ui`)** — React + Vite
+**Backend (`packages/server`)** — Node.js + Express + TypeORM
+
+---
+
+## The critical issue I also notice
+
+Your branch is **475 commits behind** `FlowiseAI/Flowise:main` — that's very far behind. You're on an old version of Flowise which may have bugs that are already fixed upstream.
+
+Also I can see `vercel.json` was created inside the `packages` folder (the commit says "Create vercel.json" under packages directory) — it needs to be at the **root** level alongside `package.json`, `Dockerfile`, etc.
+
+---
+
+## Back to your question — best deployment path
+
+Since Flowise is **React + Node.js/Express**, Vercel alone won't run it fully. The backend needs a proper server environment.
+
+**Easiest full solution — Railway (free tier):**
+
+1. Go to [railway.app](https://railway.app) → Login with GitHub
+2. **New Project** → **Deploy from GitHub repo** → select `msgimanila/Flowise`
+3. Railway auto-detects Node.js and runs it
+4. Add **PostgreSQL** plugin inside Railway
+5. Set your ENV vars (`DATABASE_*`, `FLOWISE_USERNAME`, `FLOWISE_PASSWORD`, `FLOWISE_SECRETKEY_OVERWRITE`)
+6. Deploy — both frontend and backend run together on one URL
+
+No split deployment needed, no `vercel.json` needed, no build config headaches. Want me to walk you through it step by step?
 <p align="center"> 
 <img src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise_white.svg#gh-light-mode-only">
 <img src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise_dark.svg#gh-dark-mode-only">
