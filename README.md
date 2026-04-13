@@ -83,6 +83,55 @@ Railway can provision its own Postgres database with one click — but since you
 
 Since you already have Supabase configured, **Option 1 is the path of least resistance** — Railway just plugs into it. Ready to set up Railway?
 
+Yes! The drag and drop workflow builder will work perfectly. Here's why:
+
+---
+
+## How it works visually
+
+```
+Your Browser
+     ↓
+Vercel (serves the React UI)
+     ↓  ↑
+Railway (backend API handles all the logic)
+     ↓  ↑
+Supabase (saves your workflows/flows)
+```
+
+When you drag and drop nodes in the canvas:
+1. **Vercel** serves the visual UI (the canvas, nodes, connections)
+2. Every action (save flow, load nodes, run chain) calls the **Railway** backend API
+3. **Supabase** stores your saved flows permanently
+
+---
+
+## Everything that will work ✅
+
+- Drag and drop canvas
+- Adding/connecting nodes
+- Saving chatflows
+- Creating credentials (OpenAI keys etc.)
+- Running/testing flows
+- Chat interface
+- Document store
+- API endpoints
+- Everything Flowise normally does
+
+---
+
+## The only thing Vercel does
+
+Vercel **only** serves the HTML/JS/CSS files to your browser. Once loaded, your browser talks **directly to Railway** for all the actual functionality. Vercel is essentially just a CDN for the UI files.
+
+---
+
+## One important thing to check
+
+In your `packages/ui` code there should be a config file that sets the API base URL. We need to make sure `VITE_BASE_URL` is properly set in Vercel pointing to your Railway URL — otherwise the UI won't know where to send API calls.
+
+Ready to set up Railway so we can get the full thing working?
+
 [![Release Notes](https://img.shields.io/github/release/FlowiseAI/Flowise)](https://github.com/FlowiseAI/Flowise/releases)
 [![Discord](https://img.shields.io/discord/1087698854775881778?label=Discord&logo=discord)](https://discord.gg/jbaHfsRVBW)
 [![Twitter Follow](https://img.shields.io/twitter/follow/FlowiseAI?style=social)](https://twitter.com/FlowiseAI)
