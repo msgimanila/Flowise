@@ -33,6 +33,56 @@ No split deployment needed, no `vercel.json` needed, no build config headaches. 
 <img src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise_dark.svg#gh-dark-mode-only">
 </p>
 
+
+Yes, Railway handles the database too. You have two options:
+
+---
+
+## Option 1 — Keep Supabase (Recommended since you already set it up)
+
+```
+GitHub Repo
+    ↓
+Vercel (Frontend) ←→ Railway (Backend) ←→ Supabase (Database)
+```
+
+Railway just connects to your existing Supabase Postgres using the same `DATABASE_*` ENV vars you already configured. Nothing changes on the Supabase side.
+
+Just add these ENV vars in Railway:
+```
+DATABASE_TYPE=postgres
+DATABASE_HOST=db.xxxx.supabase.co
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=yourpassword
+DATABASE_NAME=postgres
+DATABASE_SSL=true
+FLOWISE_USERNAME=admin
+FLOWISE_PASSWORD=yourpassword
+FLOWISE_SECRETKEY_OVERWRITE=yourkey
+```
+
+---
+
+## Option 2 — Use Railway's built-in Postgres
+
+Railway can provision its own Postgres database with one click — but since you already have Supabase set up and working, there's no reason to switch.
+
+---
+
+## Your final architecture
+
+| Service | Platform | Purpose |
+|---|---|---|
+| Frontend UI | Vercel | React app users visit |
+| Backend API | Railway | Node.js Express server |
+| Database | Supabase | Stores all flows, credentials, chat history |
+| File Storage | S3 (optional) | Uploaded files |
+
+---
+
+Since you already have Supabase configured, **Option 1 is the path of least resistance** — Railway just plugs into it. Ready to set up Railway?
+
 [![Release Notes](https://img.shields.io/github/release/FlowiseAI/Flowise)](https://github.com/FlowiseAI/Flowise/releases)
 [![Discord](https://img.shields.io/discord/1087698854775881778?label=Discord&logo=discord)](https://discord.gg/jbaHfsRVBW)
 [![Twitter Follow](https://img.shields.io/twitter/follow/FlowiseAI?style=social)](https://twitter.com/FlowiseAI)
