@@ -1,10 +1,8 @@
 {
-  "version": 2,
-  "buildCommand": "pnpm --filter flowise-ui build",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "create-react-app",
+  "buildCommand": "pnpm run build --filter=ui",
+  "installCommand": "pnpm install --frozen-lockfile",
   "outputDirectory": "packages/ui/build",
-  "installCommand": "pnpm install",
-  "framework": null,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "ignoreCommand": "npx turbo-ignore"
 }
